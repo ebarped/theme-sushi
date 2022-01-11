@@ -10,7 +10,10 @@
 ## Install
 
 ```fish
-$ omf install sushi
+omf cd
+cd themes
+git clone https://github.com/ebarped/theme-sushi sushi-ebarped
+omf theme sushi-ebarped
 ```
 
 ## Features
