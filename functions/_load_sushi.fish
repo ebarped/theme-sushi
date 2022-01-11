@@ -1,6 +1,6 @@
 # Colors
 function blue
-	set color -o 539bff
+	set_color -o 539bff
 end
 
 function orange
