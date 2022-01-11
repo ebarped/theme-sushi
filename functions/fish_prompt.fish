@@ -4,6 +4,8 @@ function fish_prompt
 	set -l symbol "λ "
 	set -l code $status
 
+	printf (yellow)"("(dim)$cwd(yellow)") "(off)
+
 	if test -n "$SSH_CLIENT"
 		set -l host (hostname -s)
 		set -l who (whoami)
@@ -54,6 +56,16 @@ function fish_prompt
 		echo -n -s (red)") "(off)
 	end
 
+	command -sq kubectl; and k8s::current_context >/dev/null 2>/dev/null; and begin
+	        set -l k8s_namespace (k8s::current_namespace)
+	        if test -z "$k8s_namespace"
+	                printf (yellow)"("(cyan)(k8s::current_context)(yellow)") "(off)
+	        else
+	                printf (yellow)"("(cyan)(k8s::current_context)"/$k8s_namespace"(yellow)") "(off)
+	        end
+	end
+
+	echo
 	if test "$code" = 0
 		echo -n -s (red)"$symbol"(off)
 	else

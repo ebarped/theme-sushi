@@ -13,20 +13,20 @@ function fish_right_prompt
 		end
 	end
 
-	command -sq kubectl; and k8s::current_context >/dev/null 2>/dev/null; and begin
-		set -l k8s_namespace (k8s::current_namespace)
-		if test -z "$k8s_namespace"
-			printf (yellow)"("(dim)(k8s::current_context)(yellow)") "(off)
-		else
-			printf (yellow)"("(dim)(k8s::current_context)"/$k8s_namespace"(yellow)") "(off)
-		end
-	end
+	#command -sq kubectl; and k8s::current_context >/dev/null 2>/dev/null; and begin
+	#	set -l k8s_namespace (k8s::current_namespace)
+	#	if test -z "$k8s_namespace"
+	#		printf (yellow)"("(dim)(k8s::current_context)(yellow)") "(off)
+	#	else
+	#		printf (yellow)"("(dim)(k8s::current_context)"/$k8s_namespace"(yellow)") "(off)
+	#	end
+	#end
 
 	if terraform::workspace
 		set terraform_workspace_name (command cat .terraform/environment)
 		printf (yellow)"("(dim)$terraform_workspace_name(yellow)") "(off)
 	end
 
-	printf (yellow)"("(dim)$cwd(yellow)") "(off)
+	#printf (yellow)"("(dim)$cwd(yellow)") "(off)
 	printf (dim)(date +%H(yellow):(dim)%M(yellow):(dim)%S)(off)
 end
