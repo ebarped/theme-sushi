@@ -1,4 +1,8 @@
 # Colors
+function blue
+	set color -o 539bff
+end
+
 function orange
     set_color -o ee5819
 end
