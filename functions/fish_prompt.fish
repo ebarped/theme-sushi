@@ -3,6 +3,7 @@ _load_sushi
 function fish_prompt
 	set -l symbol "λ "
 	set -l code $status
+	set cwd (prompt_pwd)
 
 	printf (yellow)"("(dim)$cwd(yellow)") "(off)
 
