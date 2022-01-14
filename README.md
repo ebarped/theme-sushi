@@ -7,6 +7,8 @@
 
 > 🍣 Sushi theme for [Oh My Fish][omf-link].
 
+:warning: I modified the theme a lot, dont trust the screenshots nor the features
+
 ## Install
 
 ```fish
