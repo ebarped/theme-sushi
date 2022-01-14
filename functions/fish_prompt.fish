@@ -17,10 +17,6 @@ function fish_prompt
 		set -l branch (git::branch_name 2>/dev/null)
 		set -l ref (git show-ref --head --abbrev | awk '{print substr($0,0,7)}' | sed -n 1p)
 
-		if git::is_stashed
-			echo -n -s (white)"^"(off)
-		end
-
 		echo -n -s (red)"("(off)
 
 		if git::is_dirty
@@ -35,6 +31,10 @@ function fish_prompt
 			end
 		else
 			printf (dim)"$ref"(off)
+		end
+
+		if git::is_stashed
+			echo -n -s " | 🚩"
 		end
 
 		for remote in (git remote)
