@@ -50,7 +50,7 @@ function fish_prompt
 			end
 
 			if test $behind_count -ne 0
-				echo -n -s (white)" -"$behind_count(off)
+				echo -n -s (white)" | -"$behind_count(off)
 			end
 		end
 
