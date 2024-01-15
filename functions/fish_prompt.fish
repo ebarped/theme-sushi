@@ -57,14 +57,12 @@ function fish_prompt
 		echo -n -s (red)") "(off)
 	end
 
-	command -sq kubectl; and k8s::current_context >/dev/null 2>/dev/null; and begin
+	k8s::current_context >/dev/null 2>/dev/null; and begin
 		set -l k8s_namespace (k8s::current_namespace)
 		if test -z "$k8s_namespace"
-			#printf (yellow)"("(cyan)(k8s::current_context)(yellow)") "(off)
 			printf (yellow)"("(blue)"☸ "(cyan)(k8s::current_context)(yellow)") "(off)
 		else
-			#printf (yellow)"("(cyan)(k8s::current_context)"/$k8s_namespace"(yellow)") "(off)
-			printf (yellow)"("(blue)"☸ "(cyan)(k8s::current_context)"/$k8s_namespace"(yellow)") "(off)
+			printf (yellow)"("(blue)"☸ "(cyan)(k8s::current_context)(orange)"@"(cyan)$k8s_namespace(yellow)") "(off)
 		end
 	end
 

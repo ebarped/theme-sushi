@@ -62,11 +62,11 @@ end
 # Kubernetes
 
 function k8s::current_context
-    command kubectl config current-context
+	command yq '.current-context' ~/.kube/config
 end
 
 function k8s::current_namespace
-    command kubectl config view --minify -o jsonpath='{.contexts[0].context.namespace}'
+	command yq '.contexts[0].context.namespace' ~/.kube/config
 end
 
 # Terraform
