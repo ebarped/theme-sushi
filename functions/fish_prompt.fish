@@ -59,7 +59,7 @@ function fish_prompt
 
 	k8s::current_context >/dev/null 2>/dev/null; and begin
 		set -l k8s_namespace (k8s::current_namespace)
-		if test -z "$k8s_namespace"
+		if test "$k8s_namespace" = "null"
 			printf (yellow)"("(blue)"☸ "(cyan)(k8s::current_context)(yellow)") "(off)
 		else
 			printf (yellow)"("(blue)"☸ "(cyan)(k8s::current_context)(orange)"@"(cyan)$k8s_namespace(yellow)") "(off)
