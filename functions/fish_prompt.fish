@@ -57,12 +57,18 @@ function fish_prompt
 		echo -n -s (red)") "(off)
 	end
 
-	k8s::current_context >/dev/null 2>/dev/null; and begin
-		set -l k8s_namespace (k8s::current_namespace)
-		if test "$k8s_namespace" = "null"
-			printf (yellow)"("(blue)"☸ "(cyan)(k8s::current_context)(yellow)") "(off)
+	set -l k8s_context (k8s::current_context 2>/dev/null); and begin
+		set -l k8s_namespace (k8s::current_namespace 2>/dev/null)
+		if test "$k8s_context" = "null"
+			# context is empty, i have no kubeconfig set
 		else
-			printf (yellow)"("(blue)"☸ "(cyan)(k8s::current_context)(orange)"@"(cyan)$k8s_namespace(yellow)") "(off)
+			if test "$k8s_namespace" = "null"
+				# kubeconfig set, but no namespace set
+				printf (yellow)"("(blue)"☸ "(cyan)(k8s::current_context)(yellow)") "(off)
+			else
+				# kubeconfig and namespace set
+				printf (yellow)"("(blue)"☸ "(cyan)(k8s::current_context)(orange)"@"(cyan)$k8s_namespace(yellow)") "(off)
+			end
 		end
 	end
 
