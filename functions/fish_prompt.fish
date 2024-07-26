@@ -14,11 +14,15 @@ function fish_prompt
 	end
 
 	if git::is_repo
+		set -l gituser (git config user.name 2>/dev/null)
 		set -l branch (git::branch_name 2>/dev/null)
 		set -l ref (git show-ref --head --abbrev | awk '{print substr($0,0,7)}' | sed -n 1p)
 
-		echo -n -s (red)"("(off)
 
+		echo -n -s (red)"("(off)
+		printf (blue)"$gituser"(off)
+		printf "@"
+		
 		if git::is_dirty
 			printf (white)"*"(off)
 		end
