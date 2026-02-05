@@ -83,6 +83,15 @@ function terraform::workspace
 	end
 end
 
+# Azure
+function azure::current_subscription
+    if command -sq jq; and test -r ~/.azure/azureProfile.json
+        cat ~/.azure/azureProfile.json | jq -r '.subscriptions[] | select(.isDefault==true) | .name' 2>/dev/null
+    else if command -sq az
+        command az account show --query name -o tsv 2>/dev/null
+    end
+end
+
 function _load_sushi
 	# do nothing
 end

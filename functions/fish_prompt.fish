@@ -76,6 +76,11 @@ function fish_prompt
 		end
 	end
 
+	set -l azure_sub (azure::current_subscription)
+	if test -n "$azure_sub"
+		printf (yellow)"("(blue)"☁️  "(blue)"$azure_sub"(yellow)") "(off)
+	end
+
 	echo
 	if test "$code" = 0
 		echo -n -s (red)"$symbol"(off)
