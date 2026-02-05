@@ -62,11 +62,12 @@ end
 # Kubernetes
 
 function k8s::current_context
-	command yq '.current-context' ~/.kube/config
+	command yq -r '."current-context"' ~/.kube/config
+	#command yq '.current-context' ~/.kube/config
 end
 
 function k8s::current_namespace
-	command yq '.contexts[0].context.namespace' ~/.kube/config
+	command yq -r '.contexts[0].context.namespace' ~/.kube/config
 end
 
 # Terraform
