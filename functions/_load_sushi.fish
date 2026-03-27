@@ -92,6 +92,21 @@ function azure::current_subscription
     end
 end
 
+# GCP
+function gcp::current_project
+    set -l gcloud_config "$HOME/.config/gcloud/configurations/config_default"
+    if test -r "$gcloud_config"
+        grep -E '^project = ' "$gcloud_config" 2>/dev/null | sed 's/project = //'
+    end
+end
+
+function gcp::current_account
+    set -l gcloud_config "$HOME/.config/gcloud/configurations/config_default"
+    if test -r "$gcloud_config"
+        grep -E '^account = ' "$gcloud_config" 2>/dev/null | sed 's/account = //'
+    end
+end
+
 function _load_sushi
 	# do nothing
 end
