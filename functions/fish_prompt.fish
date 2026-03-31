@@ -77,8 +77,9 @@ function fish_prompt
 	end
 
 	set -l azure_sub (azure::current_subscription)
+	set -l azure_account (azure::current_account)
 	if test -n "$azure_sub"
-		printf (yellow)"("(blue)"🔷 "(blue)"$azure_sub"(yellow)") "(off)
+		printf (yellow)"("(blue)"🔷 "(blue)"$azure_account"(orange)"@"(blue)"$azure_sub"(yellow)") "(off)
 	end
 
 	set -l gcp_project (gcp::current_project)
